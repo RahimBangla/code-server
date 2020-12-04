@@ -2509,7 +2509,7 @@ index 0000000000000000000000000000000000000000..a6c1f9f848f441b761397ba78e2fef60
 +}
 diff --git a/src/vs/server/node/connection.ts b/src/vs/server/node/connection.ts
 new file mode 100644
-index 0000000000000000000000000000000000000000..0b6fe3ed173576109efac139c50f85041c1d7073
+index 0000000000000000000000000000000000000000..487a599ab3db42b48adcd7f1a37511ab050655ad
 --- /dev/null
 +++ b/src/vs/server/node/connection.ts
 @@ -0,0 +1,189 @@
@@ -2679,7 +2679,7 @@ index 0000000000000000000000000000000000000000..0b6fe3ed173576109efac139c50f8504
 +				case '__$console':
 +					const fn = this.logger[event.severity === 'log' ? 'info' : event.severity];
 +					if (fn) {
-+						fn('console', field('arguments', event.arguments));
++						fn.bind(this.logger)('console', field('arguments', event.arguments));
 +					} else {
 +						this.logger.error('Unexpected severity', field('event', event));
 +					}
